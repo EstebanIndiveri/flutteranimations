@@ -1,6 +1,9 @@
 // import 'package:disenos/src/challenge/cuadrado_animado_page.dart';
 // import 'package:disenos/src/pages/graficas_circulares_page.dart';
+// import 'package:disenos/src/labs/slideshow_page.dart';
+// import 'package:disenos/src/labs/slideshow_page.dart';
 import 'package:disenos/src/pages/slideshow_page.dart';
+// import 'package:disenos/src/pages/slideshow_page.dart';
 import 'package:flutter/material.dart';
 // import 'package:disenos/src/pages/headers_page.dart';
 
@@ -14,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños App',
-      home: SlideShowPage(),
+      home: SlidesShowPage(),
     );
   }
 }

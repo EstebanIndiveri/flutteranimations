@@ -28,7 +28,11 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
           height: 300,
           // color: Colors.red,
           // child: Text('$percent %',style: TextStyle(fontSize: 50.0),) ,
-          child: RadialProgress(percent:percent),
+          child: RadialProgress(
+            percent:percent,
+            primaryColor: Colors.purple,
+            secondaryColor: Colors.grey,
+            ),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:disenos/src/widwets/radial_progress.dart';
 import 'package:flutter/material.dart';
 
 
@@ -22,7 +23,13 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
           });
         },),
       body: Center(
-        child: Text('$percent %',style: TextStyle(fontSize: 50.0),) ,
+        child: Container(
+          width: 300,
+          height: 300,
+          color: Colors.red,
+          // child: Text('$percent %',style: TextStyle(fontSize: 50.0),) ,
+          child: RadialProgress(percent:40.0),
+        ),
       ),
     );
   }

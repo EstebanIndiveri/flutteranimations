@@ -7,11 +7,15 @@ class RadialProgress extends StatefulWidget {
   final percent;
   final Color primaryColor;
   final Color secondaryColor;
+  final double weightSecondary;
+  final double weightPrimary;
 
   const RadialProgress({ 
     @required this.percent, 
     this.primaryColor=Colors.blueGrey,
-    this.secondaryColor=Colors.amber,
+    this.secondaryColor=Colors.amber, 
+    this.weightSecondary=4,
+    this.weightPrimary=10,
     });
 
   @override
@@ -51,7 +55,9 @@ class _RadialProgressState extends State<RadialProgress> with SingleTickerProvid
           height: double.infinity,
           child: CustomPaint(painter: _MiRadialProgress((widget.percent - differAnimation)+(differAnimation*controller.value)
           ,widget.primaryColor,
-          widget.secondaryColor
+          widget.secondaryColor,
+          widget.weightSecondary,
+          widget.weightPrimary,
           ),
           ),
         );
@@ -64,10 +70,15 @@ class _MiRadialProgress extends CustomPainter {
   final percent;
   final Color primaryColor;
   final Color secondaryColor;
+  final double weightSecondary;
+  final double weightPrimary;
+
   _MiRadialProgress(
     this.percent,
     this.primaryColor,
-    this.secondaryColor,
+    this.secondaryColor, 
+    this.weightSecondary, 
+    this.weightPrimary,
     );
 
   @override
@@ -75,7 +86,7 @@ class _MiRadialProgress extends CustomPainter {
     // Implement
     // Ciclecomplete
     final paint=new Paint()
-    ..strokeWidth=4
+    ..strokeWidth=weightSecondary
     ..color=secondaryColor
     ..style=PaintingStyle.stroke;
 
@@ -87,7 +98,7 @@ class _MiRadialProgress extends CustomPainter {
 
     // arc
      final paintArco=new Paint()
-    ..strokeWidth=10
+    ..strokeWidth=weightPrimary
     ..color=primaryColor
     ..style=PaintingStyle.stroke;
 

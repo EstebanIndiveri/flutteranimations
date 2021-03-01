@@ -10,7 +10,7 @@ class SlidesShowPage extends StatelessWidget {
       body: Slideshow(
         dotsHeight: true,
         secondarycolor: Colors.grey,
-        primarycolor: Colors.blueAccent,
+        primarycolor: Colors.red,
         slides: <Widget>[
            SvgPicture.asset('assets/svg/slide-1.svg'),
            SvgPicture.asset('assets/svg/slide-2.svg'),

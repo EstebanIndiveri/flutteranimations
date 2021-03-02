@@ -66,7 +66,7 @@ class _CrearEstructuraSlideshow extends StatelessWidget {
             if(!this.dotsHeight)
             _Dots(this.slides.length),
       ],
-      );
+    );
   }
 }
 
@@ -89,44 +89,29 @@ class _Dots extends StatelessWidget {
       child: 
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        // children: <Widget>[
-        //   _Dot(0),
-        //   _Dot(1),
-        //   _Dot(2)
-
-        // ],
-        // children: List.generate(this.totalSlides, (i) => _Dot(i,this.primaryColor,this.secondaryColor)),
         children: List.generate(this.totalSlides, (i) => _Dot(i)),
-
       ),
     );
   }
 }
 
 class _Dot extends StatelessWidget {
-  // final Color primaryColor;
-  // final Color secondaryColor;
   final int index;
-
   _Dot(this.index);
-  // _Dot(this.index, this.primaryColor, this.secondaryColor);
-
   @override
   Widget build(BuildContext context) {
-    // final pageViewIndex=Provider.of<_SlideshowModel>(context).currentPage;
     final ssModel=Provider.of<_SlideshowModel>(context);
     double tamano;
     Color color;
     if(ssModel.currentPage >= index - 0.5 && ssModel.currentPage  < index + 0.5){
        tamano=ssModel.bulletprimary;
        color=ssModel.primaryColor;
-
     }else{
       tamano=ssModel.bulletSecondary;
       color=ssModel.secondaryColor;
     }
     return AnimatedContainer(
-      duration: Duration(microseconds: 200),
+      duration: Duration(microseconds: 3000),
       width: tamano,
       height: tamano,
       margin: EdgeInsets.symmetric(horizontal: 5),
@@ -140,49 +125,34 @@ class _Dot extends StatelessWidget {
 
 class _Slides extends StatefulWidget {
   final List<Widget>slides;
-  
   _Slides(this.slides);
-
   @override
   __SlidesState createState() => __SlidesState();
 }
-
 class __SlidesState extends State<_Slides> {
-
   final pageViewController=new PageController();
-
   @override
   void initState() { 
     super.initState();
     pageViewController.addListener(() {
       Provider.of<_SlideshowModel>(context,listen: false).currentPage=pageViewController.page;
     });
-    
   }
   @override
   void dispose() { 
     pageViewController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: PageView(
         controller: pageViewController,
-        // children: <Widget>[
-        //   _Slide('assets/svg/slide-1.svg'),
-        //   _Slide('assets/svg/slide-2.svg'),
-        //   _Slide('assets/svg/slide-3.svg'),
-        // ],
         children: widget.slides.map((slide) => _Slide(slide)).toList(),
       ),
     );
   }
 }
-
-
 class _Slide extends StatelessWidget {
   final Widget slide;
   _Slide(this.slide);
@@ -192,18 +162,15 @@ class _Slide extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       padding: EdgeInsets.all(30),
-      // child: SvgPicture.asset(svg),
       child: slide,
     );
   }
 }
 
 class _SlideshowModel with ChangeNotifier{
-
   double _currentPage=0;
   Color _primaryColor=Colors.blue;
   Color _secondaryColor=Colors.grey;
-
   double _bulletprimary=12.0;
   double _bulletSecondary=12.0;
 

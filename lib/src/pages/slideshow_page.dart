@@ -8,8 +8,8 @@ class SlidesShowPage extends StatelessWidget {
     return  Scaffold(
       // backgroundColor: Colors.purple,
       body: Slideshow(
-        bulletprimary:40,
-        bulletSecondary:12,
+        bulletprimary:12,
+        bulletSecondary:20,
         // dotsHeight: true,
         secondarycolor: Colors.grey.shade300,
         primarycolor: Color(0xffFF5A7E),

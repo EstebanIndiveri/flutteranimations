@@ -184,23 +184,23 @@ class _SlideshowModel with ChangeNotifier{
   Color get primaryColor=>this._primaryColor;
   set primaryColor(Color color){
     this._primaryColor=color;
-    notifyListeners();
+    // notifyListeners();
   }
 
 Color get secondaryColor=>this._secondaryColor;
   set secondaryColor(Color color){
     this._secondaryColor=color;
-    notifyListeners();
+    // notifyListeners();
   }
   double get bulletprimary=>this._bulletprimary;
   set bulletprimary(double tamano){
     this._bulletprimary=tamano;
-    notifyListeners();
+    // notifyListeners();
   }
 
   double get bulletSecondary=>this._bulletSecondary;
   set bulletSecondary(double tamano){
     this._bulletprimary=tamano;
-    notifyListeners();
+    // notifyListeners();
   }
 }

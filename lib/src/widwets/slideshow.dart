@@ -10,12 +10,16 @@ class Slideshow extends StatelessWidget {
   final bool dotsHeight;
   final Color primarycolor;
   final Color secondarycolor;
+  final double bulletprimary;
+  final double bulletSecondary;
 
   Slideshow({
     @required this.slides,
     this.dotsHeight=false, 
     this.primarycolor=Colors.black, 
-    this.secondarycolor=Colors.grey,
+    this.secondarycolor=Colors.grey, 
+    this.bulletprimary=12.0, 
+    this.bulletSecondary=12.0,
     });
 
   @override
@@ -23,15 +27,13 @@ class Slideshow extends StatelessWidget {
     return ChangeNotifierProvider(
       // create:(_)=>new SliderModel(),
       create:(_)=>new _SlideshowModel(),
-
-            
       child: SafeArea(
-              child: Center(
-            // child:SvgPicture.asset('assets/svg/slide-1.svg')
-            // child:SvgPicture.asset('assets/svg/slide-1.svg')
-            child:Builder(
+        child: Center(
+          child:Builder(
               builder: (BuildContext context) { 
                 Provider.of<_SlideshowModel>(context).primaryColor=this.primarycolor;
+                Provider.of<_SlideshowModel>(context).bulletprimary=this.bulletprimary;
+                Provider.of<_SlideshowModel>(context).bulletSecondary=this.bulletSecondary;
                 Provider.of<_SlideshowModel>(context).secondaryColor=this.secondarycolor;
                 return _CrearEstructuraSlideshow(dotsHeight: dotsHeight, slides: slides);
 
@@ -57,16 +59,12 @@ class _CrearEstructuraSlideshow extends StatelessWidget {
     return Column(
       children: <Widget>[
         if(this.dotsHeight)
-        // _Dots(this.slides.length,this.primarycolor,this.secondarycolor),
         _Dots(this.slides.length),
-
           Expanded(
            child: _Slides(this.slides)
             ),
             if(!this.dotsHeight)
-            // _Dots(this.slides.length,this.primarycolor,this.secondarycolor),
             _Dots(this.slides.length),
-
       ],
       );
   }
@@ -117,15 +115,23 @@ class _Dot extends StatelessWidget {
   Widget build(BuildContext context) {
     // final pageViewIndex=Provider.of<_SlideshowModel>(context).currentPage;
     final ssModel=Provider.of<_SlideshowModel>(context);
+    double tamano;
+    Color color;
+    if(ssModel.currentPage >= index - 0.5 && ssModel.currentPage  < index + 0.5){
+       tamano=ssModel.bulletprimary;
+       color=ssModel.primaryColor;
 
+    }else{
+      tamano=ssModel.bulletSecondary;
+      color=ssModel.secondaryColor;
+    }
     return AnimatedContainer(
       duration: Duration(microseconds: 200),
-      width: 12,
-      height: 12,
+      width: tamano,
+      height: tamano,
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        color: (ssModel.currentPage >= index - 0.5 && ssModel.currentPage  < index + 0.5)
-        ?ssModel.primaryColor:ssModel.secondaryColor,
+        color:color,
         shape: BoxShape.circle
       ),
     );
@@ -198,6 +204,9 @@ class _SlideshowModel with ChangeNotifier{
   Color _primaryColor=Colors.blue;
   Color _secondaryColor=Colors.grey;
 
+  double _bulletprimary=12.0;
+  double _bulletSecondary=12.0;
+
   double get currentPage=>this._currentPage;
 
   set currentPage(double currentPage){
@@ -216,5 +225,15 @@ Color get secondaryColor=>this._secondaryColor;
     this._secondaryColor=color;
     notifyListeners();
   }
+  double get bulletprimary=>this._bulletprimary;
+  set bulletprimary(double tamano){
+    this._bulletprimary=tamano;
+    notifyListeners();
+  }
 
+  double get bulletSecondary=>this._bulletSecondary;
+  set bulletSecondary(double tamano){
+    this._bulletprimary=tamano;
+    notifyListeners();
+  }
 }
